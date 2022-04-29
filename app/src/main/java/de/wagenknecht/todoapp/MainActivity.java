@@ -1,6 +1,7 @@
 package de.wagenknecht.todoapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
         adapter = new Adapter(items);
         recyclerView.setAdapter(adapter);
 
-
+        //Hier fügen wir einen TouchCallback ein den wir an den RecyclerView binden
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new SwipeToDeleteCallback((Adapter) adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
 
@@ -60,4 +64,6 @@ public class MainActivity extends AppCompatActivity {
 //        database.todoDao().addTodo(new Todo("Arbeit", "", Todo.Priority.HIGH));
 //        update();
     }
+
+
 }

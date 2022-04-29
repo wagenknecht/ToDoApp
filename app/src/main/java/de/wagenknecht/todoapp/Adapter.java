@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<viewHolder>{
+//Code aus RecycleBsp genutzt
+public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder>{
 
     List<String> items;
 
@@ -35,27 +36,34 @@ public class Adapter extends RecyclerView.Adapter<viewHolder>{
     public int getItemCount() {
         return items.size();
     }
-}
 
-class viewHolder extends RecyclerView.ViewHolder {
-
-    TextView textView;
-    private Adapter adapter;
-
-    public viewHolder(@NonNull View itemView) {
-        super(itemView);
-
-        textView = itemView.findViewById(R.id.textItem);
-        itemView.findViewById(R.id.delete).setOnClickListener(view -> {
-            adapter.items.remove(getAdapterPosition());
-            adapter.notifyItemRemoved(getAdapterPosition());
-        });
+    public void remove(int position) {
+        items.remove(position);
+        notifyItemRemoved(position);
     }
 
-    public viewHolder linkAdapter(Adapter adapter){
-        this.adapter = adapter;
-        return this;
+    class viewHolder extends RecyclerView.ViewHolder {
+
+        TextView textView;
+        private Adapter adapter;
+
+        public viewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            textView = itemView.findViewById(R.id.textItem);
+            itemView.findViewById(R.id.delete).setOnClickListener(view -> {
+                adapter.items.remove(getAdapterPosition());
+                adapter.notifyItemRemoved(getAdapterPosition());
+            });
+        }
+
+        public viewHolder linkAdapter(Adapter adapter){
+            this.adapter = adapter;
+            return this;
+        }
     }
 }
+
+
 
 
