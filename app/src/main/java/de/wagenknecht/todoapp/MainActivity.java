@@ -16,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppDatabase database;
 
-    String[] data = {"Hallo", "Lara", "Ich", "Liebe", "Dich"};
-    int counter = 0;
     List<String> items = new LinkedList<>();
     Adapter adapter;
 
@@ -58,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pushPlus(View view) {
-        items.add(data[counter%5]);
-        counter++;
+        TextView eingabe = findViewById(R.id.textEingabe);
+        items.add(eingabe.getText().toString());
         adapter.notifyItemInserted(items.size()-1);
 //        database.todoDao().addTodo(new Todo("Arbeit", "", Todo.Priority.HIGH));
 //        update();
