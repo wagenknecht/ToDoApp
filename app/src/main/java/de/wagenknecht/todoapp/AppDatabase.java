@@ -1,6 +1,5 @@
 package de.wagenknecht.todoapp;
 
-
 import android.content.Context;
 
 import androidx.room.Database;
@@ -19,7 +18,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
-                    Room.databaseBuilder(context, AppDatabase.class, "userdatabase")
+                    Room.databaseBuilder(context, AppDatabase.class, "TodoDB")
                             //Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class)
                             // To simplify the exercise, allow queries on the main thread.
                             // Don't do this on a real app!

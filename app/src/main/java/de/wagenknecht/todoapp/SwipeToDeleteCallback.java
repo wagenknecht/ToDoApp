@@ -5,14 +5,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //Diese Klasse nutzt Gestures und realisiert die Callbacks zur Behandlung von Gesten
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
-    private Adapter mAdapter;
+    private TodoListAdapter mTodoListAdapter;
 
-    public SwipeToDeleteCallback(Adapter adapter) {
+
+    public SwipeToDeleteCallback(TodoListAdapter todoListAdapter) {
         //Hier können wir entscheiden welche Swipes wir zulassen. Aktuell ist
         //dies nur in eine Richtung erlauibt. Für beide Richtungen den auskommentierten
         //Teil hinzufügen und dann in onSwiped() per switch case unterscheiden
         super(0, ItemTouchHelper.LEFT ); //| ItemTouchHelper.RIGHT);
-        mAdapter = adapter;
+        mTodoListAdapter = todoListAdapter;
     }
 
     @Override
@@ -28,7 +29,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
         switch(direction) {
             case ItemTouchHelper.LEFT:
-                mAdapter.remove(position);
+//                mTodoListAdapter.remove(position);
                 break;
             case ItemTouchHelper.RIGHT:
                 //mAdapter.remove(position);

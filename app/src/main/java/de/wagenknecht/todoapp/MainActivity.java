@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,54 +15,44 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppDatabase database;
-
-    List<String> items = new LinkedList<>();
-    Adapter adapter;
+    TodoListAdapter todoListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        database = AppDatabase.getDatabase(getApplicationContext());
-        update();
 
+        initRecyclerView();
+        loadTodos();
+    }
 
-        items.add("Code it");
-
+    private void initRecyclerView() {
         //Anzeige der Item Liste
-        RecyclerView recyclerView = findViewById(R.id.itemList);
+        RecyclerView recyclerView = findViewById(R.id.todoList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Adapter(items);
-        recyclerView.setAdapter(adapter);
+        todoListAdapter = new TodoListAdapter(this);
+        recyclerView.setAdapter(todoListAdapter);
 
         //Hier fügen wir einen TouchCallback ein den wir an den RecyclerView binden
         ItemTouchHelper itemTouchHelper = new
-                ItemTouchHelper(new SwipeToDeleteCallback((Adapter) adapter));
+                ItemTouchHelper(new SwipeToDeleteCallback(todoListAdapter));
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-
-    private void update(){
+    private void loadTodos(){
+        AppDatabase database = AppDatabase.getDatabase(getApplicationContext());
         List<Todo> todoList = database.todoDao().getAllTodo();
-        TextView textView = findViewById(R.id.textAnzeige);
-        String ausgabe = "";
-        for (Todo todo : todoList) ausgabe = ausgabe + todo.title + "; ";
-        textView.setText(ausgabe);
+        todoListAdapter.setTodoList(todoList);
     }
 
-    public void pushButton(View view) {
-
-        update();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadTodos();
     }
 
-    public void pushPlus(View view) {
-        TextView eingabe = findViewById(R.id.textEingabe);
-        items.add(eingabe.getText().toString());
-        adapter.notifyItemInserted(items.size()-1);
-//        database.todoDao().addTodo(new Todo("Arbeit", "", Todo.Priority.HIGH));
-//        update();
+    public void showDetailActivity(View view) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        startActivity(intent);
     }
-
-
 }
