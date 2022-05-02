@@ -1,6 +1,9 @@
 package de.wagenknecht.todoapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +17,8 @@ import java.util.List;
 
 public class PriorityActivity extends AppCompatActivity {
 
+    PriorityListAdapter priorityListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,30 +31,45 @@ public class PriorityActivity extends AppCompatActivity {
                 savePriority(inputNewPriority.getText().toString());
             }
         });
+
+        initRecyclerView();
         loadPriorities();
-        initPriorityList();
+
     }
 
     private void savePriority(String priorityName) {
         AppDatabase database = AppDatabase.getDatabase(this.getApplicationContext());
         database.priorityDao().addPriority(new Priority(priorityName));
-        initPriorityList();
+        loadPriorities();
     }
 
-    private List<Priority> loadPriorities() {
+    private void initRecyclerView() {
+        //Anzeige der Item Liste
+        RecyclerView recyclerView = findViewById(R.id.priorityList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        priorityListAdapter = new PriorityListAdapter(this);
+        recyclerView.setAdapter(priorityListAdapter);
+
+        //Hier fügen wir einen TouchCallback ein den wir an den RecyclerView binden
+//        ItemTouchHelper itemTouchHelper = new
+//                ItemTouchHelper(new SwipeToDeleteCallback(priorityListAdapter));
+//        itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    private void loadPriorities() {
         AppDatabase database = AppDatabase.getDatabase(this.getApplicationContext());
         List<Priority> priorityList = database.priorityDao().getAllPriorities();
-        return priorityList;
+        priorityListAdapter.setPriorityList(priorityList);
     }
 
-    private void initPriorityList(){
-        TextView textview = findViewById(R.id.testPriority);
-        String helper = "";
-        for(Priority p : loadPriorities()){
-           helper = helper + p.priority_id + ": " + p.priority_name + "\n";
-        }
-        textview.setText(helper);
-    }
+//    private void initPriorityList(){
+//        TextView textview = findViewById(R.id.testPriority);
+//        String helper = "";
+//        for(Priority p : loadPriorities()){
+//           helper = helper + p.priority_id + ": " + p.priority_name + "\n";
+//        }
+//        textview.setText(helper);
+//    }
 
 
 }

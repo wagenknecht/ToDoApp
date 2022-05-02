@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myViewHolder>{
+public class PriorityListAdapter extends RecyclerView.Adapter<PriorityListAdapter.myViewHolder>{
 
     private Context context;
-    private List<Todo> todoList;
+    private List<Priority> priorityList;
 
-    public void setTodoList(List<Todo> todoList) {
-        this.todoList = todoList;
+    public void setPriorityList(List<Priority> priorityList) {
+        this.priorityList = priorityList;
         notifyDataSetChanged();
     }
 
-    public TodoListAdapter(Context context){
+    public PriorityListAdapter(Context context){
         this.context = context;
     }
 
@@ -29,20 +29,18 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.item_todo, parent, false);
+                .inflate(R.layout.item_priority, parent, false);
         return new myViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.itemTitel.setText(todoList.get(position).title);
-        holder.itemBeschreibung.setText(todoList.get(position).description);
-        //holder.itemPriorität.setText(todoList.get(position).priority);
+        holder.priorityName.setText(priorityList.get(position).priority_name);
     }
 
     @Override
     public int getItemCount() {
-        return todoList.size();
+        return priorityList.size();
     }
 
 //    public void remove(int position) {
@@ -52,17 +50,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
 
     class myViewHolder extends RecyclerView.ViewHolder {
 
-        TextView itemTitel;
-        TextView itemBeschreibung;
-        TextView itemPrioritaet;
-        private TodoListAdapter todoListAdapter;
+        TextView priorityName;
 
         public myViewHolder(View itemView) {
             super(itemView);
 
-            itemTitel = itemView.findViewById(R.id.itemTitel);
-            itemBeschreibung = itemView.findViewById(R.id.itemBeschreibung);
-            itemPrioritaet = itemView.findViewById(R.id.itemPriorität);
+            priorityName = itemView.findViewById(R.id.priorityName);
         }
     }
 }
