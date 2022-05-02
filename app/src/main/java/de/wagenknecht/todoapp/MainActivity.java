@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_priority);
                 return true;
             case R.id.newCategory:
-
+                Intent intent_category = new Intent(this, CategoryActivity.class);
+                startActivity(intent_category);
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);
