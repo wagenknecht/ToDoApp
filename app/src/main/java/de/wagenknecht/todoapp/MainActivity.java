@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -54,5 +56,31 @@ public class MainActivity extends AppCompatActivity {
     public void showDetailActivity(View view) {
         Intent intent = new Intent(this, DetailActivity.class);
         startActivity(intent);
+    }
+
+    //Kontextmenu
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        switch (menuItem.getItemId()){
+            case R.id.newTodo:
+                Intent intent_detail = new Intent(this, DetailActivity.class);
+                startActivity(intent_detail);
+                return true;
+            case R.id.newPriority:
+                Intent intent_priority = new Intent(this, PriorityActivity.class);
+                startActivity(intent_priority);
+                return true;
+            case R.id.newCategory:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
     }
 }

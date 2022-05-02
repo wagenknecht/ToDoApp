@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/newTodo"
+        android:title="ToDos">
+
+    </item>
+    <item android:id="@+id/newPriority"
+        android:title="Prioritäten">
+
+    </item>
+    <item android:id="@+id/newCategory"
+        android:title="Kategorien">
+    </item>
+</menu>
