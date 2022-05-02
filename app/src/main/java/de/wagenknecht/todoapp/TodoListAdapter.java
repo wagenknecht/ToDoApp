@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-//Code aus RecycleBsp genutzt
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myViewHolder>{
 
-//    List<String> items;
     private Context context;
     private List<Todo> todoList;
 
@@ -26,10 +24,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
     public TodoListAdapter(Context context){
         this.context = context;
     }
-
-//    public TodoListAdapter(List<String> items) {
-//        this.items = items;
-//    }
 
     @NonNull
     @Override
@@ -69,16 +63,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
             itemTitel = itemView.findViewById(R.id.itemTitel);
             itemBeschreibung = itemView.findViewById(R.id.itemBeschreibung);
             itemPrioritaet = itemView.findViewById(R.id.itemPriorität);
-//            itemView.findViewById(R.id.delete).setOnClickListener(view -> {
-//                todoListAdapter.items.remove(getAdapterPosition());
-//                todoListAdapter.notifyItemRemoved(getAdapterPosition());
-//            });
         }
-
-//        public myViewHolder linkAdapter(TodoListAdapter todoListAdapter){
-//            this.todoListAdapter = todoListAdapter;
-//            return this;
-//        }
     }
 }
 

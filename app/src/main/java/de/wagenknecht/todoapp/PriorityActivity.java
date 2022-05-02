@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 public class PriorityActivity extends AppCompatActivity {
 
@@ -21,11 +26,30 @@ public class PriorityActivity extends AppCompatActivity {
                 savePriority(inputNewPriority.getText().toString());
             }
         });
-
+        loadPriorities();
+        initPriorityList();
     }
 
     private void savePriority(String priorityName) {
         AppDatabase database = AppDatabase.getDatabase(this.getApplicationContext());
         database.priorityDao().addPriority(new Priority(priorityName));
+        initPriorityList();
     }
+
+    private List<Priority> loadPriorities() {
+        AppDatabase database = AppDatabase.getDatabase(this.getApplicationContext());
+        List<Priority> priorityList = database.priorityDao().getAllPriorities();
+        return priorityList;
+    }
+
+    private void initPriorityList(){
+        TextView textview = findViewById(R.id.testPriority);
+        String helper = "";
+        for(Priority p : loadPriorities()){
+           helper = helper + p.priority_id + ": " + p.priority_name + "\n";
+        }
+        textview.setText(helper);
+    }
+
+
 }
