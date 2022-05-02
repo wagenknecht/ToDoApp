@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface TodoDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addTodo(Todo todo);
 
     @Query("select * from todo")

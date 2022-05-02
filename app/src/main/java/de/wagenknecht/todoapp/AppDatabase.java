@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Todo.class,  Category.class
+@Database(entities = {Todo.class,  Category.class, Priority.class
 }, version = 16, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -14,6 +14,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TodoDao todoDao();
     public abstract CategoryDao categoryDao();
+    public abstract PriorityDao priorityDao();
 
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
