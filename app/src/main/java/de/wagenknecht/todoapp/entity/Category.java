@@ -1,4 +1,4 @@
-package de.wagenknecht.todoapp;
+package de.wagenknecht.todoapp.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

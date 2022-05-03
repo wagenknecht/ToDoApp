@@ -1,13 +1,14 @@
-package de.wagenknecht.todoapp;
+package de.wagenknecht.todoapp.dao;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
+import de.wagenknecht.todoapp.entity.Todo;
 
 @Dao
 public interface TodoDao {
@@ -19,7 +20,7 @@ public interface TodoDao {
     List<Todo> getAllTodo();
 
     @Query("select * from todo where todo_id = :todoId")
-    List<Todo> getTodo(long todoId);
+    Todo getTodo(int todoId);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateTodo(Todo todo);
@@ -28,5 +29,5 @@ public interface TodoDao {
     void removeAllTodos();
 
     @Query("delete from todo where todo_id = :todoId")
-    void removeTodo(long todoId);
+    void removeTodo(int todoId);
 }

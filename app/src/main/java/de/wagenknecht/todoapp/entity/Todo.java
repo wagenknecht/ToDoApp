@@ -1,4 +1,4 @@
-package de.wagenknecht.todoapp;
+package de.wagenknecht.todoapp.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class Todo {
 
     @PrimaryKey(autoGenerate = true)
-    public long todo_id;
+    public int todo_id;
 
     @ColumnInfo
     public String title;

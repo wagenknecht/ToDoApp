@@ -6,6 +6,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import de.wagenknecht.todoapp.dao.CategoryDao;
+import de.wagenknecht.todoapp.dao.PriorityDao;
+import de.wagenknecht.todoapp.dao.TodoDao;
+import de.wagenknecht.todoapp.entity.Category;
+import de.wagenknecht.todoapp.entity.Priority;
+import de.wagenknecht.todoapp.entity.Todo;
+
 @Database(entities = {Todo.class,  Category.class, Priority.class
 }, version = 16, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {

@@ -3,6 +3,8 @@ package de.wagenknecht.todoapp;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import de.wagenknecht.todoapp.adapter.TodoListAdapter;
+
 //Diese Klasse nutzt Gestures und realisiert die Callbacks zur Behandlung von Gesten
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     private TodoListAdapter mTodoListAdapter;

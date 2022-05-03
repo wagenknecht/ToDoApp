@@ -1,7 +1,6 @@
 package de.wagenknecht.todoapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,11 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
+
+import de.wagenknecht.todoapp.adapter.PriorityListAdapter;
+import de.wagenknecht.todoapp.entity.Priority;
 
 public class PriorityActivity extends AppCompatActivity {
 

@@ -1,5 +1,7 @@
 package de.wagenknecht.todoapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,17 +9,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import de.wagenknecht.todoapp.adapter.TodoListAdapter;
+import de.wagenknecht.todoapp.entity.Todo;
 
-    TodoListAdapter todoListAdapter;
+public class MainActivity extends AppCompatActivity implements TodoListAdapter.onTodoListener {
+
+    private TodoListAdapter todoListAdapter;
+    private List<Todo> todoList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //Anzeige der Item Liste
         RecyclerView recyclerView = findViewById(R.id.todoList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        todoListAdapter = new TodoListAdapter(this);
+        todoListAdapter = new TodoListAdapter(this, this);
         recyclerView.setAdapter(todoListAdapter);
 
         //Hier fügen wir einen TouchCallback ein den wir an den RecyclerView binden
@@ -43,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadTodos(){
         AppDatabase database = AppDatabase.getDatabase(getApplicationContext());
-        List<Todo> todoList = database.todoDao().getAllTodo();
+        todoList = database.todoDao().getAllTodo();
         todoListAdapter.setTodoList(todoList);
     }
 
@@ -54,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDetailActivity(View view) {
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, TodoActivity.class);
         startActivity(intent);
     }
 
@@ -69,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch (menuItem.getItemId()){
             case R.id.newTodo:
-                Intent intent_detail = new Intent(this, DetailActivity.class);
+                Intent intent_detail = new Intent(this, TodoActivity.class);
                 startActivity(intent_detail);
                 return true;
             case R.id.newPriority:
@@ -83,5 +89,15 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
+    }
+
+    //Methode, um Klick auf ein Todoo zu handeln
+    @Override
+    public void onTodoClick(int position) {
+        Log.d(TAG, "onTodoClick: click.");
+
+        Intent intent = new Intent(this, TodoActivity.class);
+        intent.putExtra("todoId", todoList.get(position).todo_id);
+        startActivity(intent);
     }
 }

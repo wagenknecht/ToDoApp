@@ -1,4 +1,4 @@
-package de.wagenknecht.todoapp;
+package de.wagenknecht.todoapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import de.wagenknecht.todoapp.R;
+import de.wagenknecht.todoapp.entity.Priority;
 
 public class PriorityListAdapter extends RecyclerView.Adapter<PriorityListAdapter.myViewHolder>{
 

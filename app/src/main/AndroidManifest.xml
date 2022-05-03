@@ -16,7 +16,7 @@
             android:name=".PriorityActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".TodoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

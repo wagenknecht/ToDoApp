@@ -1,4 +1,4 @@
-package de.wagenknecht.todoapp;
+package de.wagenknecht.todoapp.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 public class Priority {
 
     @PrimaryKey(autoGenerate = true)
-    public long priority_id;
+    public int priority_id;
     public String priority_name;
 
     public Priority() {
