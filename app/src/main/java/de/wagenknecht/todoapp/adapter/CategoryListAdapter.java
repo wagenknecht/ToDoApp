@@ -47,7 +47,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             public void onClick(View view) {
                 Category category = categoryList.get(position);
                 AppDatabase database = AppDatabase.getDatabase(context);
-                database.priorityDao().removePriority(category.category_id);
+                database.categoryDao().removeCategory(category.category_id);
                 categoryList.remove(category);
                 notifyItemRemoved(position);
             }

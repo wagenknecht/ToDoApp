@@ -7,10 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import de.wagenknecht.todoapp.entity.Todo;
 
@@ -36,6 +39,12 @@ public class TodoActivity extends AppCompatActivity {
         }
         EditText inputAblaufdatum = findViewById(R.id.inputAblaufdatum);
         Spinner inputPriorität = findViewById(R.id.inputPriorität);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        inputPriorität.setAdapter(spinnerAdapter);
+
+        spinnerAdapter.addAll(database.priorityDao().getAllPriorities().get(0).priority_name);
+        spinnerAdapter.notifyDataSetChanged();
 
         //Buttons
         Button saveTodo = findViewById(R.id.saveToDo);
