@@ -55,8 +55,4 @@ public class PriorityActivity extends AppCompatActivity {
         List<Priority> priorityList = database.priorityDao().getAllPriorities();
         priorityListAdapter.setPriorityList(priorityList);
     }
-
-
-
-
 }
