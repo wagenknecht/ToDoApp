@@ -48,8 +48,5 @@
                 app:srcCompat="@android:drawable/ic_menu_add"
                 android:background="@null"/>
         </LinearLayout>
-
-
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

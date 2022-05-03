@@ -7,6 +7,13 @@ import androidx.room.PrimaryKey;
 public class Category {
 
     @PrimaryKey(autoGenerate = true)
-    public long category_id;
-    public String name;
+    public int category_id;
+    public String category_name;
+
+    public Category() {
+    }
+
+    public Category(String category_name) {
+        this.category_name = category_name;
+    }
 }

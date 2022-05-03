@@ -16,7 +16,7 @@ import de.wagenknecht.todoapp.entity.Priority;
 
 public class PriorityActivity extends AppCompatActivity {
 
-    PriorityListAdapter priorityListAdapter;
+    private PriorityListAdapter priorityListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,11 @@ public class PriorityActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 savePriority(inputNewPriority.getText().toString());
+                inputNewPriority.setText("");
             }
         });
-
         initRecyclerView();
         loadPriorities();
-
     }
 
     private void savePriority(String priorityName) {
