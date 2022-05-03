@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class PriorityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_priority);
-        final EditText inputNewPriority = findViewById(R.id.inputNewPriority);
-        Button saveNewPriority = findViewById(R.id.buttonSaveNewPriority);
-        saveNewPriority.setOnClickListener(new View.OnClickListener() {
+        final EditText inputNewPriority = findViewById(R.id.newPriority);
+        ImageButton addNewPriority = findViewById(R.id.buttonAddNewPriority);
+        addNewPriority.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 savePriority(inputNewPriority.getText().toString());
@@ -48,11 +48,6 @@ public class PriorityActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         priorityListAdapter = new PriorityListAdapter(this);
         recyclerView.setAdapter(priorityListAdapter);
-
-        //Hier fügen wir einen TouchCallback ein den wir an den RecyclerView binden
-//        ItemTouchHelper itemTouchHelper = new
-//                ItemTouchHelper(new SwipeToDeleteCallback(priorityListAdapter));
-//        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     private void loadPriorities() {
@@ -61,14 +56,7 @@ public class PriorityActivity extends AppCompatActivity {
         priorityListAdapter.setPriorityList(priorityList);
     }
 
-//    private void initPriorityList(){
-//        TextView textview = findViewById(R.id.testPriority);
-//        String helper = "";
-//        for(Priority p : loadPriorities()){
-//           helper = helper + p.priority_id + ": " + p.priority_name + "\n";
-//        }
-//        textview.setText(helper);
-//    }
+
 
 
 }

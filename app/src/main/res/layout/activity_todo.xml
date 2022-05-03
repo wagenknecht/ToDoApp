@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:hint="Titel hier eintragen" />
         </TableRow>
 
         <TableRow
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="" />
+                android:hint="Beschreibung hier eintragen" />
         </TableRow>
 
         <TableRow

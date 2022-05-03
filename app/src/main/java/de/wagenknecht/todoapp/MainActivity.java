@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements TodoListAdapter.o
 
     private TodoListAdapter todoListAdapter;
     private List<Todo> todoList = new ArrayList<>();
+    public AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements TodoListAdapter.o
     }
 
     private void loadTodos(){
-        AppDatabase database = AppDatabase.getDatabase(getApplicationContext());
+        database = AppDatabase.getDatabase(getApplicationContext());
         todoList = database.todoDao().getAllTodo();
         todoListAdapter.setTodoList(todoList);
     }
@@ -74,15 +75,15 @@ public class MainActivity extends AppCompatActivity implements TodoListAdapter.o
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
         switch (menuItem.getItemId()){
-            case R.id.newTodo:
+            case R.id.MenuNewTodo:
                 Intent intent_detail = new Intent(this, TodoActivity.class);
                 startActivity(intent_detail);
                 return true;
-            case R.id.newPriority:
+            case R.id.MenuNewPriority:
                 Intent intent_priority = new Intent(this, PriorityActivity.class);
                 startActivity(intent_priority);
                 return true;
-            case R.id.newCategory:
+            case R.id.MenuNewCategory:
                 Intent intent_category = new Intent(this, CategoryActivity.class);
                 startActivity(intent_category);
                 return true;

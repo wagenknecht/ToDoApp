@@ -9,13 +9,32 @@
     app:contentPadding="10dp">
 
 
-    <TextView
-        android:id="@+id/priorityName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/app_name"
-        android:textSize="22sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
 
+        <EditText
+            android:id="@+id/priorityName"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <ImageButton
+            android:id="@+id/deletePriority"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@android:drawable/ic_menu_delete"
+            android:background="@null"/>
+
+        <ImageButton
+            android:id="@+id/saveEditPriority"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@android:drawable/ic_menu_save"
+            android:background="@null"/>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
