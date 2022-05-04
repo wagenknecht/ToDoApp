@@ -1,6 +1,8 @@
 package de.wagenknecht.todoapp.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,9 +52,22 @@ public class PriorityListAdapter extends RecyclerView.Adapter<PriorityListAdapte
             public void onClick(View view) {
                 Priority priority = priorityList.get(position);
                 AppDatabase database = AppDatabase.getDatabase(context);
-                database.priorityDao().removePriority(priority.priority_id);
-                priorityList.remove(priority);
-                notifyItemRemoved(position);
+                if(database.todoDao().getAllPriorityIdFromTodo().contains(priority.priority_id)){
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("Hinweis");
+                    alertDialog.setMessage("Es existieren noch ToDos mit dieser Priorität, daher kann diese nicht gelöscht werden");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                } else {
+                    database.priorityDao().removePriority(priority.priority_id);
+                    priorityList.remove(priority);
+                    notifyItemRemoved(position);
+                }
             }
         });
         holder.saveEditPriority.setOnClickListener(new View.OnClickListener() {

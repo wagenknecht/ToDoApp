@@ -16,5 +16,10 @@ public class Priority {
     public Priority(String priority_name) {
         this.priority_name = priority_name;
     }
+
+    @Override
+    public String toString() {
+        return this.priority_name;
+    }
 }
 

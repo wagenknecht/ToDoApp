@@ -20,7 +20,10 @@ public interface PriorityDao {
     @Query("select * from priority")
     List<Priority> getAllPriorities();
 
-    @Query("select * from todo where priority_id = :priority_id")
+    @Query("select priority_id from priority")
+    List<Integer> getAllPriorityIds();
+
+    @Query("select * from priority where priority_id = :priority_id")
     Priority getPriority(int priority_id);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)

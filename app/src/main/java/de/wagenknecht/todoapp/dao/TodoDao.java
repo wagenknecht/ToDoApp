@@ -19,6 +19,9 @@ public interface TodoDao {
     @Query("select * from todo")
     List<Todo> getAllTodo();
 
+    @Query("select priority_id from todo")
+    List<Integer> getAllPriorityIdFromTodo();
+
     @Query("select * from todo where todo_id = :todoId")
     Todo getTodo(int todoId);
 

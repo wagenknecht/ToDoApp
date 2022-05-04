@@ -13,7 +13,7 @@ public class Todo {
     @ColumnInfo
     public String title;
     public String description;
-    public long priority_id;
+    public int priority_id;
     public String datetime;
 //    public Priority priority;
 

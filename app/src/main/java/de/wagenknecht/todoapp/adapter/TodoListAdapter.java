@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import de.wagenknecht.todoapp.AppDatabase;
 import de.wagenknecht.todoapp.R;
+import de.wagenknecht.todoapp.entity.Priority;
 import de.wagenknecht.todoapp.entity.Todo;
 
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myViewHolder>{
@@ -19,6 +21,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
     private Context context;
     private List<Todo> todoList;
     private onTodoListener monTodoListener;
+    private AppDatabase database;
 
     public void setTodoList(List<Todo> todoList) {
         this.todoList = todoList;
@@ -40,9 +43,13 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.itemTitel.setText(todoList.get(position).title);
-        holder.itemBeschreibung.setText(todoList.get(position).description);
-        //holder.itemPriorität.setText(todoList.get(position).priority);
+        Todo todo = todoList.get(position);
+        database = AppDatabase.getDatabase(context);
+        Priority priority = database.priorityDao().getPriority(todo.priority_id);
+
+        holder.itemTitel.setText(todo.title);
+        holder.itemBeschreibung.setText(todo.description);
+        holder.itemPrioritaet.setText(priority.priority_name + "test");
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,7 +20,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import de.wagenknecht.todoapp.entity.Priority;
 import de.wagenknecht.todoapp.entity.Todo;
 
 public class TodoActivity extends AppCompatActivity {
@@ -46,6 +49,7 @@ public class TodoActivity extends AppCompatActivity {
             inputBeschreibung.setText(todo.description);
             inputAblaufdatum = findViewById(R.id.inputAblaufdatum);
             inputAblaufdatum.setText(todo.datetime);
+
         } else {
             todo = new Todo();
         }
@@ -77,15 +81,35 @@ public class TodoActivity extends AppCompatActivity {
             }
         };
 
-
         //Auswahl Priorität
-//        Spinner inputPriorität = findViewById(R.id.inputPriorität);
-//        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
-//        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        inputPriorität.setAdapter(spinnerAdapter);
-//
-//        spinnerAdapter.addAll(database.priorityDao().getAllPriorities().get(0).priority_name);
-//        spinnerAdapter.notifyDataSetChanged();
+        List<Priority> priorityList = database.priorityDao().getAllPriorities();
+        Spinner prioritySpinner = findViewById(R.id.inputPriorität);
+        ArrayAdapter spinnerAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, priorityList);
+
+        prioritySpinner.setAdapter(spinnerAdapter);
+
+        //Postion des Spinners mit vorh
+        prioritySpinner.setSelection(database.priorityDao().getAllPriorityIds().indexOf(todo.priority_id));
+        prioritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Priority priority = (Priority) adapterView.getSelectedItem();
+                todo.priority_id = priority.priority_id;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+
+
+
+        spinnerAdapter.addAll();
+        spinnerAdapter.notifyDataSetChanged();
 
         //Buttons
         Button saveTodo = findViewById(R.id.saveToDo);
