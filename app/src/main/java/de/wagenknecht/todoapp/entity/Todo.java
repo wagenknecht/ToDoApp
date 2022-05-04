@@ -14,16 +14,13 @@ public class Todo {
     public String title;
     public String description;
     public long priority_id;
+    public String datetime;
 //    public Priority priority;
 
     public Todo() {
     }
 
-    public Todo(String title, String description) {
-        this.title = title;
-        this.description = description;
 
-    }
 
 //    enum Priority{
 //        HIGH,
