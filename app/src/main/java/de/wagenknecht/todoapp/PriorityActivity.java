@@ -37,7 +37,7 @@ public class PriorityActivity extends AppCompatActivity {
 
     private void savePriority(String priorityName) {
         AppDatabase database = AppDatabase.getDatabase(this.getApplicationContext());
-        database.priorityDao().addPriority(new Priority(priorityName));
+        database.priorityDao().insertPriority(new Priority(priorityName));
         loadPriorities();
     }
 

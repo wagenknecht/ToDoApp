@@ -4,11 +4,14 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
 
 import de.wagenknecht.todoapp.entity.Todo;
+import de.wagenknecht.todoapp.entity.relations.CategoryWithTodos;
+import de.wagenknecht.todoapp.entity.relations.TodoWithCategories;
 
 @Dao
 public interface TodoDao {
@@ -33,4 +36,13 @@ public interface TodoDao {
 
     @Query("delete from todo where todo_id = :todoId")
     void removeTodo(int todoId);
+
+
+    @Transaction
+    @Query("select * from todo")
+    public List<TodoWithCategories> getTodoWithCategories();
+
+    @Transaction
+    @Query("select * from todo where todo_id = :todo_id")
+    public List<TodoWithCategories> getTodoWithCategories(int todo_id);
 }

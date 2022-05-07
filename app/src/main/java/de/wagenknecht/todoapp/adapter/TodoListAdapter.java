@@ -49,18 +49,16 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
 
         holder.itemTitel.setText(todo.title);
         holder.itemBeschreibung.setText(todo.description);
-        holder.itemPrioritaet.setText(priority.priority_name + "test");
+        if(priority != null){
+            holder.itemPrioritaet.setText(priority.priority_name);
+        }
+
     }
 
     @Override
     public int getItemCount() {
         return todoList.size();
     }
-
-//    public void remove(int position) {
-//        items.remove(position);
-//        notifyItemRemoved(position);
-//    }
 
     class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

@@ -4,18 +4,20 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
 
 import de.wagenknecht.todoapp.entity.Priority;
 import de.wagenknecht.todoapp.entity.Todo;
+import de.wagenknecht.todoapp.entity.relations.PriorityWithToDos;
 
 @Dao
 public interface PriorityDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void addPriority(Priority priority);
+    void insertPriority(Priority priority);
 
     @Query("select * from priority")
     List<Priority> getAllPriorities();
@@ -34,4 +36,8 @@ public interface PriorityDao {
 
     @Query("delete from priority where priority_id = :priority_id")
     void removePriority(int priority_id);
+
+    @Transaction
+    @Query("SELECT * FROM priority WHERE priority_id = :priority_id")
+    List<PriorityWithToDos> getPriorityWithTodos(int priority_id);
 }

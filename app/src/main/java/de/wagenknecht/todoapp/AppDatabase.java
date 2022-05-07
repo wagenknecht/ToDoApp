@@ -12,9 +12,14 @@ import de.wagenknecht.todoapp.dao.TodoDao;
 import de.wagenknecht.todoapp.entity.Category;
 import de.wagenknecht.todoapp.entity.Priority;
 import de.wagenknecht.todoapp.entity.Todo;
+import de.wagenknecht.todoapp.entity.relations.TodoCategoryCrossRef;
 
-@Database(entities = {Todo.class,  Category.class, Priority.class
-}, version = 16, exportSchema = false)
+@Database(entities = {
+                Todo.class,
+                Category.class,
+                Priority.class,
+                TodoCategoryCrossRef.class
+}, version = 18, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

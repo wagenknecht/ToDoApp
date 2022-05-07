@@ -12,9 +12,7 @@ import android.widget.ImageButton;
 import java.util.List;
 
 import de.wagenknecht.todoapp.adapter.CategoryListAdapter;
-import de.wagenknecht.todoapp.adapter.PriorityListAdapter;
 import de.wagenknecht.todoapp.entity.Category;
-import de.wagenknecht.todoapp.entity.Priority;
 
 public class CategoryActivity extends AppCompatActivity {
 
@@ -41,7 +39,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void saveCategory(String categoryName) {
         AppDatabase database = AppDatabase.getDatabase(this.getApplicationContext());
-        database.categoryDao().addCategory(new Category(categoryName));
+        database.categoryDao().insertCategory(new Category(categoryName));
         loadCategories();
     }
 

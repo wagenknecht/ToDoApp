@@ -15,7 +15,6 @@ import java.util.List;
 import de.wagenknecht.todoapp.AppDatabase;
 import de.wagenknecht.todoapp.R;
 import de.wagenknecht.todoapp.entity.Category;
-import de.wagenknecht.todoapp.entity.Priority;
 
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.myViewHolder>{
 
@@ -58,7 +57,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                 Category category = categoryList.get(position);
                 category.category_name = holder.categoryName.getText().toString();
                 AppDatabase database = AppDatabase.getDatabase(context);
-                database.categoryDao().addCategory(category);
+                database.categoryDao().insertCategory(category);
 
 
             }

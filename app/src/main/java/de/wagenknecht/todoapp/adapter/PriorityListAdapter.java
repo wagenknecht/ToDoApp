@@ -6,19 +6,15 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.RoomDatabase;
 
 import java.util.List;
 
 import de.wagenknecht.todoapp.AppDatabase;
-import de.wagenknecht.todoapp.MainActivity;
 import de.wagenknecht.todoapp.R;
 import de.wagenknecht.todoapp.entity.Priority;
 
@@ -76,7 +72,7 @@ public class PriorityListAdapter extends RecyclerView.Adapter<PriorityListAdapte
                 Priority priority = priorityList.get(position);
                 priority.priority_name = holder.priorityName.getText().toString();
                 AppDatabase database = AppDatabase.getDatabase(context);
-                database.priorityDao().addPriority(priority);
+                database.priorityDao().insertPriority(priority);
 
 
             }
