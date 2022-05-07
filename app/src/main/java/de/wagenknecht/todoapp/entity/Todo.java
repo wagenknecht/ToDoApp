@@ -15,16 +15,7 @@ public class Todo {
     public String description;
     public int priority_id;
     public String datetime;
-//    public Priority priority;
 
     public Todo() {
     }
-
-
-
-//    enum Priority{
-//        HIGH,
-//        MEDIUM,
-//        LOW
-//    }
 }
