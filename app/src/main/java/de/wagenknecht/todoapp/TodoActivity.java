@@ -27,8 +27,11 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import de.wagenknecht.todoapp.entity.Category;
 import de.wagenknecht.todoapp.entity.Priority;
 import de.wagenknecht.todoapp.entity.Todo;
+import de.wagenknecht.todoapp.entity.relations.TodoCategoryCrossRef;
+import de.wagenknecht.todoapp.entity.relations.TodoWithCategories;
 
 public class TodoActivity extends AppCompatActivity {
 
@@ -39,6 +42,15 @@ public class TodoActivity extends AppCompatActivity {
     EditText inputAblaufdatum;
     //Date Picker Dialog
     DatePickerDialog.OnDateSetListener onDateSetListener;
+
+
+    //Kategorien auswählen
+    ArrayList<Integer> categoryList;
+    String[] categoryArray;
+    Integer[] categoryIds;
+    boolean[] selectCategoriesArray;
+    TextView selectCategories;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +67,16 @@ public class TodoActivity extends AppCompatActivity {
             inputAblaufdatum = findViewById(R.id.inputAblaufdatum);
             inputAblaufdatum.setText(todo.datetime);
 
+            selectCategories = findViewById(R.id.selectCategories);
+            List<Category> categoryList = database.todoDao().getTodoWithCategories(todo.todo_id).categories;
+            String kategorien = "";
+            for(Category c : categoryList){
+                kategorien += c.category_name + ", ";
+            }
+            selectCategories.setText(kategorien);
         } else {
             todo = new Todo();
+            Log.d(TAG, "Hier:" + String.valueOf(todo.todo_id));
         }
 
         //Datumsauswahl
@@ -133,17 +153,18 @@ public class TodoActivity extends AppCompatActivity {
         });
 
         //Kategorien auswählen
-        // https://www.geeksforgeeks.org/how-to-implement-multiselect-dropdown-in-android/
-        TextView selectCategories = findViewById(R.id.selectCategories);
-        ArrayList<Integer> langList = new ArrayList<>();
-        String[] langArray = {"Java", "C++", "Kotlin", "C", "Python", "Javascript"};
-        boolean[] selectCategoriesArray = new boolean[langArray.length];
+        //Genutzt: https://www.geeksforgeeks.org/how-to-implement-multiselect-dropdown-in-android/
+        selectCategories = findViewById(R.id.selectCategories);
+        categoryList = new ArrayList<>();
+        categoryArray = database.categoryDao().getAllCategoryNames().toArray(new String[0]);
+        categoryIds = database.categoryDao().getAllCategoryIds().toArray(new Integer[0]);
+        selectCategoriesArray = new boolean[categoryArray.length];
 
 
         selectCategories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                database.todoCategoryCrossRefDao().deleteAllTodoCategoryCrossRefByTodoId(todo.todo_id);
                 // Initialize alert dialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(TodoActivity.this);
 
@@ -153,20 +174,20 @@ public class TodoActivity extends AppCompatActivity {
                 // set dialog non cancelable
                 builder.setCancelable(false);
 
-                builder.setMultiChoiceItems(langArray, selectCategoriesArray, new DialogInterface.OnMultiChoiceClickListener() {
+                builder.setMultiChoiceItems(categoryArray, selectCategoriesArray, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i, boolean b) {
                         // check condition
                         if (b) {
                             // when checkbox selected
                             // Add position  in lang list
-                            langList.add(i);
+                            categoryList.add(i);
                             // Sort array list
-                            Collections.sort(langList);
+                            Collections.sort(categoryList);
                         } else {
                             // when checkbox unselected
-                            // Remove position from langList
-                            langList.remove(Integer.valueOf(i));
+                            // Remove position from categoryList
+                            categoryList.remove(Integer.valueOf(i));
                         }
                     }
                 });
@@ -177,11 +198,12 @@ public class TodoActivity extends AppCompatActivity {
                         // Initialize string builder
                         StringBuilder stringBuilder = new StringBuilder();
                         // use for loop
-                        for (int j = 0; j < langList.size(); j++) {
+                        for (int j = 0; j < categoryList.size(); j++) {
                             // concat array value
-                            stringBuilder.append(langArray[langList.get(j)]);
+                            //database.todoCategoryCrossRefDao().insertTodoCategoryCrossRef(new TodoCategoryCrossRef(todoId, categoryIds[categoryList.get(j)]));
+                            stringBuilder.append(categoryArray[categoryList.get(j)]);
                             // check condition
-                            if (j != langList.size() - 1) {
+                            if (j != categoryList.size() - 1) {
                                 // When j value  not equal
                                 // to lang list size - 1
                                 // add comma
@@ -208,7 +230,7 @@ public class TodoActivity extends AppCompatActivity {
                             // remove all selection
                             selectCategoriesArray[j] = false;
                             // clear language list
-                            langList.clear();
+                            categoryList.clear();
                             // clear text view value
                             selectCategories.setText("");
                         }
@@ -233,10 +255,21 @@ public class TodoActivity extends AppCompatActivity {
         todo.datetime = datum;
         database.todoDao().addTodo(todo);
 
+        //Erneut aufrufen, da nun ID Vergeben
+        if(todo.todo_id == 0) {
+            todo = database.todoDao().getLastTodo();
+        }
+
+        for (int j = 0; j < categoryList.size(); j++){
+
+            database.todoCategoryCrossRefDao().insertTodoCategoryCrossRef(new TodoCategoryCrossRef(todo.todo_id, categoryIds[categoryList.get(j)]));
+        }
+
         finish();
     }
 
     private void deleteTodo() {
+        database.todoCategoryCrossRefDao().deleteAllTodoCategoryCrossRefByTodoId(todo.todo_id);
         database.todoDao().removeTodo(todo.todo_id);
         finish();
     }

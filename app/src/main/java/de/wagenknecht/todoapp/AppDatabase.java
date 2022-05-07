@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase;
 
 import de.wagenknecht.todoapp.dao.CategoryDao;
 import de.wagenknecht.todoapp.dao.PriorityDao;
+import de.wagenknecht.todoapp.dao.TodoCategoryCrossRefDao;
 import de.wagenknecht.todoapp.dao.TodoDao;
 import de.wagenknecht.todoapp.entity.Category;
 import de.wagenknecht.todoapp.entity.Priority;
@@ -19,7 +20,7 @@ import de.wagenknecht.todoapp.entity.relations.TodoCategoryCrossRef;
                 Category.class,
                 Priority.class,
                 TodoCategoryCrossRef.class
-}, version = 18, exportSchema = false)
+}, version = 20, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -27,6 +28,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract TodoDao todoDao();
     public abstract CategoryDao categoryDao();
     public abstract PriorityDao priorityDao();
+    public abstract TodoCategoryCrossRefDao todoCategoryCrossRefDao();
 
     public static AppDatabase getDatabase(Context context) {
         if (INSTANCE == null) {

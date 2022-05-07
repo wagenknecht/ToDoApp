@@ -28,6 +28,9 @@ public interface TodoDao {
     @Query("select * from todo where todo_id = :todoId")
     Todo getTodo(int todoId);
 
+    @Query("select * from todo order by todo_id desc limit 1")
+    Todo getLastTodo();
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateTodo(Todo todo);
 
@@ -44,5 +47,5 @@ public interface TodoDao {
 
     @Transaction
     @Query("select * from todo where todo_id = :todo_id")
-    public List<TodoWithCategories> getTodoWithCategories(int todo_id);
+    public TodoWithCategories getTodoWithCategories(int todo_id);
 }

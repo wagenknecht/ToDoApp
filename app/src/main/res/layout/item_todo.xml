@@ -38,12 +38,26 @@
                 android:text=""
                 android:textSize="12sp" />
 
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
             <TextView
                 android:id="@+id/itemPriorität"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="keine Priorität"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/itemDatum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="keine Ablaufdatum"
                 android:textSize="12sp" />
         </TableRow>
 

@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import de.wagenknecht.todoapp.AppDatabase;
@@ -49,10 +51,10 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
 
         holder.itemTitel.setText(todo.title);
         holder.itemBeschreibung.setText(todo.description);
+        holder.itemDatum.setText(todo.datetime);
         if(priority != null){
             holder.itemPrioritaet.setText(priority.priority_name);
         }
-
     }
 
     @Override
@@ -65,6 +67,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
         TextView itemTitel;
         TextView itemBeschreibung;
         TextView itemPrioritaet;
+        TextView itemDatum;
         onTodoListener onTodoListener;
 
         public myViewHolder(View itemView, onTodoListener onTodoListener) {
@@ -73,6 +76,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
             itemTitel = itemView.findViewById(R.id.itemTitel);
             itemBeschreibung = itemView.findViewById(R.id.itemBeschreibung);
             itemPrioritaet = itemView.findViewById(R.id.itemPriorität);
+            itemDatum = itemView.findViewById(R.id.itemDatum);
             this.onTodoListener = onTodoListener;
             itemView.setOnClickListener(this);
         }
