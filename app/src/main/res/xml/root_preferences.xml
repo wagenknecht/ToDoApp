@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="Texteinstellungen">
+
+        <EditTextPreference
+            android:defaultValue="12"
+            app:key="fontsize"
+            app:title="Schriftgröße"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="numberDecimal"
+            android:digits="0123456789"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,12 +1,14 @@
 package de.wagenknecht.todoapp.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
@@ -49,11 +51,18 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
         database = AppDatabase.getDatabase(context);
         Priority priority = database.priorityDao().getPriority(todo.priority_id);
 
+        Float textSize = usePreferences();
+
         holder.itemTitel.setText(todo.title);
+        holder.itemTitel.setTextSize(textSize);
         holder.itemBeschreibung.setText(todo.description);
+        holder.itemBeschreibung.setTextSize(textSize);
+
         holder.itemDatum.setText(todo.datetime);
+        holder.itemDatum.setTextSize(textSize);
         if(priority != null){
             holder.itemPrioritaet.setText(priority.priority_name);
+            holder.itemPrioritaet.setTextSize(textSize);
         }
     }
 
@@ -89,6 +98,17 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
 
     public interface onTodoListener{
         void onTodoClick(int position);
+    }
+
+    public Float usePreferences() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String fontsizeString = prefs.getString("fontsize", "schrift");
+        //Da Probleme mit prefs.getInt;
+        Float fontsize = Float.parseFloat(fontsizeString);
+        if(fontsize < 10F){
+            return 10F;
+        }
+        return fontsize;
     }
 }
 
