@@ -11,4 +11,7 @@
     <item android:id="@+id/MenuNewCategory"
         android:title="Kategorien">
     </item>
+    <item android:id="@+id/MenuSettings"
+        android:title="Einstellungen">
+    </item>
 </menu>

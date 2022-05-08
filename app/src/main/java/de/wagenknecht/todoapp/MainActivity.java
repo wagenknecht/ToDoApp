@@ -3,11 +3,14 @@ package de.wagenknecht.todoapp;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -86,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements TodoListAdapter.o
             case R.id.MenuNewCategory:
                 Intent intent_category = new Intent(this, CategoryActivity.class);
                 startActivity(intent_category);
+                return true;
+            case R.id.MenuSettings:
+                Intent intent_settings = new Intent(this, SettingsActivity.class);
+                startActivity(intent_settings);
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);
