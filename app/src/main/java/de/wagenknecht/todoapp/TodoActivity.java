@@ -192,7 +192,7 @@ public class TodoActivity extends AppCompatActivity {
                     }
                 });
 
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Initialize string builder
@@ -215,14 +215,14 @@ public class TodoActivity extends AppCompatActivity {
                     }
                 });
 
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // dismiss dialog
                         dialogInterface.dismiss();
                     }
                 });
-                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                builder.setNeutralButton("Alle entfernen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // use for loop
