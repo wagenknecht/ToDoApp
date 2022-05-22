@@ -13,13 +13,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/captionTitel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Titel" />
+                android:text="Titel"
+                android:textSize="25sp"/>
         </TableRow>
 
         <TableRow
@@ -30,7 +31,6 @@
                 android:id="@+id/inputTitel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="Titel hier eintragen" />
         </TableRow>
@@ -43,7 +43,8 @@
                 android:id="@+id/captionBeschreibung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Beschreibung" />
+                android:text="Beschreibung"
+                android:textSize="25sp"/>
         </TableRow>
 
         <TableRow
@@ -67,7 +68,8 @@
                 android:id="@+id/captionAblaufdatum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ablaufdatum" />
+                android:text="Ablaufdatum"
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -96,7 +98,8 @@
                 android:id="@+id/captionPriorität"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Priorität" />
+                android:text="Priorität"
+                android:textSize="25sp"/>
         </TableRow>
 
         <TableRow
@@ -106,7 +109,20 @@
             <Spinner
                 android:id="@+id/inputPriorität"
                 android:layout_width="409dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/captionKategorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kategorie"
+                android:textSize="25sp"/>
         </TableRow>
 
         <TableRow
@@ -120,7 +136,7 @@
                 android:layout_centerInParent="true"
                 android:drawableRight="@android:drawable/arrow_down_float"
                 android:drawablePadding="16dp"
-                android:hint="Kategorien wählen"
+                android:hint="keine Kategorie gewählt"
                 android:padding="12dp" />
         </TableRow>
 
@@ -134,14 +150,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delete" />
+                android:text="Löschen" />
 
             <Button
                 android:id="@+id/saveToDo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:text="Speichern" />
         </TableRow>
     </TableLayout>
 

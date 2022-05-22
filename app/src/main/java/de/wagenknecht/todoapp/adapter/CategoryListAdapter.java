@@ -1,6 +1,8 @@
 package de.wagenknecht.todoapp.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +48,23 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             public void onClick(View view) {
                 Category category = categoryList.get(position);
                 AppDatabase database = AppDatabase.getDatabase(context);
-                database.categoryDao().removeCategory(category.category_id);
-                categoryList.remove(category);
-                notifyItemRemoved(position);
+                if(database.todoDao().getAllPriorityIdFromTodo().contains(category.category_id)) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("Hinweis");
+                    alertDialog.setMessage("Es existieren noch ToDos mit dieser Kategorie, daher kann diese nicht gelöscht werden");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                } else {
+                    database.categoryDao().removeCategory(category.category_id);
+                    categoryList.remove(category);
+                    notifyItemRemoved(position);
+                }
+
             }
         });
         holder.saveEditCategory.setOnClickListener(new View.OnClickListener() {
