@@ -16,18 +16,21 @@ import de.wagenknecht.todoapp.entity.Todo;
 import de.wagenknecht.todoapp.entity.relations.TodoCategoryCrossRef;
 
 @Database(entities = {
-                Todo.class,
-                Category.class,
-                Priority.class,
-                TodoCategoryCrossRef.class
+        Todo.class,
+        Category.class,
+        Priority.class,
+        TodoCategoryCrossRef.class
 }, version = 20, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
     public abstract TodoDao todoDao();
+
     public abstract CategoryDao categoryDao();
+
     public abstract PriorityDao priorityDao();
+
     public abstract TodoCategoryCrossRefDao todoCategoryCrossRefDao();
 
     public static AppDatabase getDatabase(Context context) {

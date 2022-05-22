@@ -12,7 +12,6 @@ import java.util.List;
 import de.wagenknecht.todoapp.entity.Category;
 import de.wagenknecht.todoapp.entity.Todo;
 import de.wagenknecht.todoapp.entity.relations.CategoryWithTodos;
-import de.wagenknecht.todoapp.entity.relations.TodoCategoryCrossRef;
 
 @Dao
 public interface CategoryDao {

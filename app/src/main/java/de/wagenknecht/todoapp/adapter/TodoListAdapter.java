@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import de.wagenknecht.todoapp.AppDatabase;
@@ -20,7 +18,7 @@ import de.wagenknecht.todoapp.R;
 import de.wagenknecht.todoapp.entity.Priority;
 import de.wagenknecht.todoapp.entity.Todo;
 
-public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myViewHolder>{
+public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myViewHolder> {
 
     private Context context;
     private List<Todo> todoList;
@@ -32,7 +30,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
         notifyDataSetChanged();
     }
 
-    public TodoListAdapter(Context context, onTodoListener onTodoListener){
+    public TodoListAdapter(Context context, onTodoListener onTodoListener) {
         this.context = context;
         this.monTodoListener = onTodoListener;
     }
@@ -60,7 +58,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
 
         holder.itemDatum.setText(todo.datetime);
         holder.itemDatum.setTextSize(textSize);
-        if(priority != null){
+        if (priority != null) {
             holder.itemPrioritaet.setText(priority.priority_name);
             holder.itemPrioritaet.setTextSize(textSize);
         }
@@ -96,7 +94,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
         }
     }
 
-    public interface onTodoListener{
+    public interface onTodoListener {
         void onTodoClick(int position);
     }
 
@@ -105,7 +103,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.myView
         String fontsizeString = prefs.getString("fontsize", "schrift");
         //Da Probleme mit prefs.getInt;
         Float fontsize = Float.parseFloat(fontsizeString);
-        if(fontsize < 10F){
+        if (fontsize < 10F) {
             return 10F;
         }
         return fontsize;

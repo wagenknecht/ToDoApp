@@ -2,13 +2,9 @@ package de.wagenknecht.todoapp;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,7 +27,6 @@ import de.wagenknecht.todoapp.entity.Category;
 import de.wagenknecht.todoapp.entity.Priority;
 import de.wagenknecht.todoapp.entity.Todo;
 import de.wagenknecht.todoapp.entity.relations.TodoCategoryCrossRef;
-import de.wagenknecht.todoapp.entity.relations.TodoWithCategories;
 
 public class TodoActivity extends AppCompatActivity {
 
@@ -60,7 +55,7 @@ public class TodoActivity extends AppCompatActivity {
         final EditText inputBeschreibung = findViewById(R.id.inputBeschreibung);
         int todoId = getIntent().getIntExtra("todoId", -1);
         database = AppDatabase.getDatabase(getApplicationContext());
-        if(todoId != -1){
+        if (todoId != -1) {
             todo = database.todoDao().getTodo(todoId);
             inputTitel.setText(todo.title);
             inputBeschreibung.setText(todo.description);
@@ -70,7 +65,7 @@ public class TodoActivity extends AppCompatActivity {
             selectCategories = findViewById(R.id.selectCategories);
             List<Category> categoryList = database.todoDao().getTodoWithCategories(todo.todo_id).categories;
             String kategorien = "";
-            for(Category c : categoryList){
+            for (Category c : categoryList) {
                 kategorien += c.category_name + ", ";
             }
             selectCategories.setText(kategorien);
@@ -100,8 +95,8 @@ public class TodoActivity extends AppCompatActivity {
         onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month+1;
-                String date = day+"."+month+"."+year;
+                month = month + 1;
+                String date = day + "." + month + "." + year;
                 inputAblaufdatum.setText(date);
             }
         };
@@ -128,9 +123,6 @@ public class TodoActivity extends AppCompatActivity {
             }
         });
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-
 
 
         spinnerAdapter.addAll();
@@ -245,7 +237,7 @@ public class TodoActivity extends AppCompatActivity {
 
     public void saveTodo(String titel, String beschreibung, String datum) {
 
-        if(titel.isEmpty()){
+        if (titel.isEmpty()) {
             todo.title = "Todo";
         } else {
             todo.title = titel;
@@ -256,11 +248,11 @@ public class TodoActivity extends AppCompatActivity {
         database.todoDao().addTodo(todo);
 
         //Erneut aufrufen, da nun ID Vergeben
-        if(todo.todo_id == 0) {
+        if (todo.todo_id == 0) {
             todo = database.todoDao().getLastTodo();
         }
 
-        for (int j = 0; j < categoryList.size(); j++){
+        for (int j = 0; j < categoryList.size(); j++) {
 
             database.todoCategoryCrossRefDao().insertTodoCategoryCrossRef(new TodoCategoryCrossRef(todo.todo_id, categoryIds[categoryList.get(j)]));
         }

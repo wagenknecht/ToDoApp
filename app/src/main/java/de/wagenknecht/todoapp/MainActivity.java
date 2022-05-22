@@ -2,20 +2,17 @@ package de.wagenknecht.todoapp;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements TodoListAdapter.o
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    private void loadTodos(){
+    private void loadTodos() {
         database = AppDatabase.getDatabase(getApplicationContext());
         todoList = database.todoDao().getAllTodo();
         todoListAdapter.setTodoList(todoList);
@@ -70,14 +67,14 @@ public class MainActivity extends AppCompatActivity implements TodoListAdapter.o
 
     //Kontextmenu
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.context_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        switch (menuItem.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
             case R.id.MenuNewTodo:
                 Intent intent_detail = new Intent(this, TodoActivity.class);
                 startActivity(intent_detail);

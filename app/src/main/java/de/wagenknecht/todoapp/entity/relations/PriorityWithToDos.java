@@ -13,8 +13,8 @@ public class PriorityWithToDos {
     @Embedded
     public Priority priority;
     @Relation(
-        parentColumn = "priority_id",
-        entityColumn = "priority_id"
+            parentColumn = "priority_id",
+            entityColumn = "priority_id"
     )
     public List<Todo> todos;
 }

@@ -18,7 +18,7 @@ import de.wagenknecht.todoapp.AppDatabase;
 import de.wagenknecht.todoapp.R;
 import de.wagenknecht.todoapp.entity.Priority;
 
-public class PriorityListAdapter extends RecyclerView.Adapter<PriorityListAdapter.myViewHolder>{
+public class PriorityListAdapter extends RecyclerView.Adapter<PriorityListAdapter.myViewHolder> {
 
     private Context context;
     private List<Priority> priorityList;
@@ -28,7 +28,7 @@ public class PriorityListAdapter extends RecyclerView.Adapter<PriorityListAdapte
         notifyDataSetChanged();
     }
 
-    public PriorityListAdapter(Context context){
+    public PriorityListAdapter(Context context) {
         this.context = context;
     }
 
@@ -48,7 +48,7 @@ public class PriorityListAdapter extends RecyclerView.Adapter<PriorityListAdapte
             public void onClick(View view) {
                 Priority priority = priorityList.get(position);
                 AppDatabase database = AppDatabase.getDatabase(context);
-                if(database.todoDao().getAllPriorityIdFromTodo().contains(priority.priority_id)){
+                if (database.todoDao().getAllPriorityIdFromTodo().contains(priority.priority_id)) {
                     AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                     alertDialog.setTitle("Hinweis");
                     alertDialog.setMessage("Es existieren noch ToDos mit dieser Priorität, daher kann diese nicht gelöscht werden");

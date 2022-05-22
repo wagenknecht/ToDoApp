@@ -39,14 +39,14 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:inputType="textPersonName"
-                android:hint="Neue Priorität"/>
+                android:hint="Neue Priorität" />
 
             <ImageButton
                 android:id="@+id/buttonAddNewPriority"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:srcCompat="@android:drawable/ic_menu_add"
-                android:background="@null"/>
+                android:background="@null" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

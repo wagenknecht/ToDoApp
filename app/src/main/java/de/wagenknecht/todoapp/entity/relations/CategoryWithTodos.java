@@ -11,7 +11,8 @@ import de.wagenknecht.todoapp.entity.Todo;
 
 
 public class CategoryWithTodos {
-    @Embedded public Category category;
+    @Embedded
+    public Category category;
     @Relation(
             parentColumn = "category_id",
             entityColumn = "todo_id",

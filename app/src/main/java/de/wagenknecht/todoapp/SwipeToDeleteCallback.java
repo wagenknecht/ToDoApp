@@ -14,7 +14,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
         //Hier können wir entscheiden welche Swipes wir zulassen. Aktuell ist
         //dies nur in eine Richtung erlauibt. Für beide Richtungen den auskommentierten
         //Teil hinzufügen und dann in onSwiped() per switch case unterscheiden
-        super(0, ItemTouchHelper.LEFT ); //| ItemTouchHelper.RIGHT);
+        super(0, ItemTouchHelper.LEFT); //| ItemTouchHelper.RIGHT);
         mTodoListAdapter = todoListAdapter;
     }
 
@@ -29,7 +29,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getBindingAdapterPosition();
 
-        switch(direction) {
+        switch (direction) {
             case ItemTouchHelper.LEFT:
 //                mTodoListAdapter.remove(position);
                 break;

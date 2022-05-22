@@ -1,7 +1,6 @@
 package de.wagenknecht.todoapp.entity.relations;
 
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 @Entity(primaryKeys = {"todo_id", "category_id"})
 public class TodoCategoryCrossRef {

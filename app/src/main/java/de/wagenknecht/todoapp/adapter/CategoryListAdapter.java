@@ -18,7 +18,7 @@ import de.wagenknecht.todoapp.AppDatabase;
 import de.wagenknecht.todoapp.R;
 import de.wagenknecht.todoapp.entity.Category;
 
-public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.myViewHolder>{
+public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.myViewHolder> {
 
     private Context context;
     private List<Category> categoryList;
@@ -28,7 +28,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         notifyDataSetChanged();
     }
 
-    public CategoryListAdapter(Context context){
+    public CategoryListAdapter(Context context) {
         this.context = context;
     }
 
@@ -48,7 +48,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             public void onClick(View view) {
                 Category category = categoryList.get(position);
                 AppDatabase database = AppDatabase.getDatabase(context);
-                if(database.todoDao().getAllPriorityIdFromTodo().contains(category.category_id)) {
+                if (database.todoDao().getAllPriorityIdFromTodo().contains(category.category_id)) {
                     AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                     alertDialog.setTitle("Hinweis");
                     alertDialog.setMessage("Es existieren noch ToDos mit dieser Kategorie, daher kann diese nicht gelöscht werden");

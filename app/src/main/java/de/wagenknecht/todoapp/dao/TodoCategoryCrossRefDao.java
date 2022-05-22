@@ -1,14 +1,12 @@
 package de.wagenknecht.todoapp.dao;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
 
-import de.wagenknecht.todoapp.entity.Todo;
 import de.wagenknecht.todoapp.entity.relations.TodoCategoryCrossRef;
 
 @Dao

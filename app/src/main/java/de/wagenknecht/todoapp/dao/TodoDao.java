@@ -10,7 +10,6 @@ import androidx.room.Update;
 import java.util.List;
 
 import de.wagenknecht.todoapp.entity.Todo;
-import de.wagenknecht.todoapp.entity.relations.CategoryWithTodos;
 import de.wagenknecht.todoapp.entity.relations.TodoWithCategories;
 
 @Dao

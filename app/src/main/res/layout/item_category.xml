@@ -27,14 +27,14 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             app:srcCompat="@android:drawable/ic_menu_delete"
-            android:background="@null"/>
+            android:background="@null" />
 
         <ImageButton
             android:id="@+id/saveEditCategory"
             android:layout_width="60dp"
             android:layout_height="60dp"
             app:srcCompat="@android:drawable/ic_menu_save"
-            android:background="@null"/>
+            android:background="@null" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
